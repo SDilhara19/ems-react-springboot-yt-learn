@@ -1,6 +1,7 @@
 package net.javaguides.ems.service.impl;
 
 import lombok.AllArgsConstructor;
+import net.javaguides.ems.data_types.EmployeeType;
 import net.javaguides.ems.dto.EmployeeDto;
 import net.javaguides.ems.entity.Employee;
 import net.javaguides.ems.exception.ResourceNotFoundException;
@@ -38,8 +39,21 @@ public class EmployeeServiceImpl implements EmployeeService {
 
     @Override
 
+    public List<EmployeeDto> getAllEmployee(EmployeeType employeeType) {
+       List<Employee> employees;
+       if(employeeType != null){
+           employees = employeeRepository.findByEmployeeType(employeeType);
+       }else{
+           employees = employeeRepository.findAll();
+       }
+        return employees.stream().map((employee) -> EmployeeMapper.mapToEmployeeDto(employee))
+                .collect(Collectors.toList());
+
+    }
+
+    @Override
     public List<EmployeeDto> getAllEmployee() {
-       List<Employee> employees =  employeeRepository.findAll();
+        List<Employee> employees = employeeRepository.findAll();
         return employees.stream().map((employee) -> EmployeeMapper.mapToEmployeeDto(employee))
                 .collect(Collectors.toList());
     }

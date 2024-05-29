@@ -5,6 +5,7 @@ import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import net.javaguides.ems.data_types.EmployeeType;
 
 @Getter
 @Setter
@@ -26,6 +27,10 @@ public class Employee {
 
     @Column(name = "email", nullable = false, unique = true )
     private String email;
+
+    @Enumerated(EnumType.STRING)
+    @Column(name = "employee_type")
+    private EmployeeType employeeType;
 }
 
 

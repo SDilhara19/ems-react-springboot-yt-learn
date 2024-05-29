@@ -4,6 +4,7 @@ import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import net.javaguides.ems.data_types.EmployeeType;
 
 @Getter
 @Setter
@@ -15,4 +16,5 @@ public class EmployeeDto {
     private String firstName;
     private String lastName;
     private String email;
+    private EmployeeType employeeType;
 }

@@ -1,6 +1,7 @@
 package net.javaguides.ems.controller;
 
 import lombok.AllArgsConstructor;
+import net.javaguides.ems.data_types.EmployeeType;
 import net.javaguides.ems.dto.EmployeeDto;
 import net.javaguides.ems.service.EmployeeService;
 import org.springframework.http.HttpStatus;
@@ -31,12 +32,18 @@ public class EmployeeController {
         return ResponseEntity.ok(employeeDto);
     }
 
-    //Get All RESTAPI
-    @GetMapping
-    public ResponseEntity<List<EmployeeDto>> getAllEmployees(){
-       List<EmployeeDto> employees =  employeeService.getAllEmployee();
-       return ResponseEntity.ok(employees);
+    @GetMapping("/type")
+    public ResponseEntity<List<EmployeeDto>> getAllEmployees() {
+        List<EmployeeDto> employees = employeeService.getAllEmployee();
+        return ResponseEntity.ok(employees);
     }
+
+    @GetMapping("/type/{empType}")
+    public ResponseEntity<List<EmployeeDto>> getAllEmployees(@PathVariable("empType") EmployeeType employeeType) {
+        List<EmployeeDto> employees = employeeService.getAllEmployee(employeeType);
+        return ResponseEntity.ok(employees);
+    }
+
 
 //    build update RESTAPI
     @PutMapping("{id}")
@@ -46,7 +53,7 @@ public class EmployeeController {
     }
 
 //    build DELETE RESTAPI
-    @DeleteMapping("{id}")
+    @DeleteMapping("/{id}")
     public ResponseEntity<String> deleteEmployee(@PathVariable("id") Long employeeId){
         employeeService.deleteEmployee(employeeId);
         return ResponseEntity.ok("Employee deleted successfully!");
